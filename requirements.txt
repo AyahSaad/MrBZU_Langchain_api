@@ -1,0 +1,16 @@
+langchain
+openai
+langchain_community
+flask
+flask-cors
+cors
+firebase_admin
+google.cloud
+google-cloud-storage
+PyPDF2
+gunicorn
+pandas
+pathlib
+langchain-openai
+langchain_community
+chromadb==0.3.29
