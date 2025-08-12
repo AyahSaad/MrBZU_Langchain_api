@@ -1,29 +1,33 @@
-# MrBZU Langchain API
-This project provides a Flask-based API that integrates Langchain with Firebase Storage and Google Cloud Storage to build a chatbot knowledge base from various document formats. It uses OpenAI’s GPT models for question-answering over documents uploaded to Firebase.
+💬 MrBZU Langchain API
+This project provides a Flask-based REST API that integrates Langchain, OpenAI, and Firebase Cloud Storage to build a smart, document-aware chatbot. It processes local or cloud-based PDF, TXT, and CSV files to create a searchable knowledge base using vector embeddings.
 
 🛠️ Features
-Knowledge Base Construction
-Loads PDFs, CSVs, and TXT files from local directories or Firebase Storage, splits text into chunks, creates vector embeddings with OpenAI, and builds a retriever-based QA model.
+📚 Knowledge Base Construction
+Loads PDF, CSV, and TXT files from local directories or Firebase Storage.
 
-Firebase & Google Cloud Storage Integration
-Connects to Firebase Storage to upload, download, list, and delete files programmatically.
+Splits text into chunks using RecursiveCharacterTextSplitter.
 
-REST API Endpoints
+Generates embeddings with OpenAI.
 
-Query the chatbot with user questions
+Creates a retriever-powered QA chain using Langchain.
 
-List files stored in Firebase buckets
+☁️ Firebase & Google Cloud Integration
+Upload, download, list, and delete files from Firebase storage buckets.
 
-Download file content dynamically from Firebase (supporting PDF, CSV, TXT)
+🌐 REST API Capabilities
+Query the chatbot with questions based on your documents.
 
-Delete files both locally and from Firebase
+Dynamically access or delete files from cloud or local storage.
 
-Update/download files from Firebase storage to local directories
+Rebuild and update the knowledge base on demand.
 
-Rebuild the chatbot knowledge base on demand
 
-Security Best Practices
-Uses environment variables to store sensitive credentials like OpenAI API key and Firebase credentials, avoiding hardcoding secrets in the source code.
+Supports file format detection and content extraction (PDF, TXT, CSV).
+
+🔐 Security Best Practices
+Sensitive credentials (OpenAI API keys, Firebase service account JSON) are stored using environment variables.
+
+Secrets are not hardcoded or committed to the repository.
 
 🔧 Technologies Used
 Python 3
@@ -32,45 +36,22 @@ Flask (REST API)
 
 Firebase Admin SDK
 
-Google Cloud Storage Client
+Google Cloud Storage Python Client
 
-Langchain (Text splitting, embeddings, vector stores)
+Langchain (embeddings, text splitting, retriever chains)
 
 OpenAI GPT-3.5-turbo
 
-Pandas, PyPDF2 for file processing
+PyPDF2, Pandas for file parsing
 
 🚀 Getting Started
-Set up environment variables (e.g., in .env):
-
-ini
-نسخ
-تحرير
+1. Set Environment Variables
+Create a .env file or export environment variables directly:
 OPENAI_API_KEY=your_openai_api_key
 GOOGLE_APPLICATION_CREDENTIALS=/path/to/firebase-adminsdk.json
-Install required packages:
+Ensure your Firebase service account JSON file is not committed to the repository.
 
-bash
-نسخ
-تحرير
+2. Install Required Packages
 pip install -r requirements.txt
-Run the Flask app:
-
-bash
-نسخ
-تحرير
+3. Run the Flask App
 python main.py
-Use the API endpoints to interact with the knowledge base and files.
-
-📝 API Endpoints
-GET /api/query/<query> — Query the chatbot with a user question.
-
-GET /get-files-name-with-id/<folder_id> — List files in Firebase storage under specific folders.
-
-GET /file/<filename> — Get content of a file (PDF, CSV, TXT) from Firebase storage.
-
-DELETE /file/<filename> — Delete a file locally and from Firebase storage.
-
-GET /updateData/<folder_id> — Download files from Firebase to local folders.
-
-POST /rebuild-knowladgeBase/<data_type> — Rebuild the chatbot knowledge base.
